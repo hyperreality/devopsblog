@@ -1,22 +1,22 @@
 ---
 layout: post
-title: Communicating Between Firecracker microVMs using Linux
+title: Communicating Between Firecracker microVMs using Linux Bridges
 ---
 
 
 The [Firecracker doc on network setup](https://github.com/firecracker-microvm/firecracker/blob/main/docs/network-setup.md) works well for basic use cases. The doc shows you how to communicate between your host and Firecracker VMs, firstly by using a TAP device then in the advanced case by using a bridge device.
 
-Up until now, I've only needed to use host-to-guest communication. But, I now want to enable VMs to network with each other. I created a bridge with its own /24, then attached two TAP devices to it, then launched microVMs configured with IPs in that subnet. Host-to-guest networking still worked, but networking between the VMs did not.
+Up until now, I've only needed to use host-to-guest communication. But, I now want to enable VMs to network with each other. I created a bridge with its own /24, then attached two TAP devices to it, and launched microVMs configured with IPs in that subnet. Host-to-guest networking still worked, but networking between the VMs did not.
 
 ### Unicasts not welcome here
 
-More specifically, broadcast packets were being forwarded over the bridge, but not normal unicast packets. For instance I noticed that ARP requests were reaching the other microVM, easy to see both in the destination VM's ARP table and confirmed in `tcpdump`, but the ARP replies were getting dropped between the bridge and the destination VM. This was odd because the packet MAC addresses matched the TAP devices and everything seemed to be configured correctly.
+More specifically, broadcast packets were being forwarded over the bridge, but not normal unicast packets. For instance I noticed that ARP requests (which are broadcasted to all hosts in a LAN) from one microVM were reaching the other VM. This was seen in the destination VM's ARP table and in `tcpdump`. But the ARP replies which are unicasted from the receiving host to the requestor were getting dropped between the bridge and the requesting VM. This was odd because the packet MAC addresses matched the TAP devices and everything seemed to be configured correctly.
 
 I found that nobody on the Internet seems to know how to fix this either. There's an [issue on the Firecracker GitHub](https://github.com/firecracker-microvm/firecracker-demo/issues/18) and posts on StackExchange but no guide or hints anywhere as to how to get Firecracker-to-Firecracker communication working. In fact there's lots of questions on StackExchange about this bridge behaviour in general, where only broadcasts make it through. Unfortunately the answer was usually that an `iptables` or `arptables` or `ebtables` rule was interfering, or that a particular `sysctl` setting had been overlooked (e.g. `net.ipv4.ip_forward`), none of which applied in my case.
 
 ### Turning the bridge into a pseudo-hub
 
-After discussing with a friend, I decided that an approach to try was to flush the MAC table of the bridge. Linux bridges behave like switches so just like a switch it should flood all its ports until it knows on which port it can find a device. If something has gone funky with the switching, perhaps this would help.
+After discussing with a friend, I decided that an approach to try was to flush the MAC table of the bridge. Linux bridges behave like switches so with an empty MAC table it should flood all its ports until it knows on which port it can find a device.
 
 Here's the setup, `8f4b9e2676` is the bridge and `8f4b9e2676_1` and `8f4b9e2676_2` are TAP devices attached to microVMs with internally assigned IP addresses `10.0.80.2` and `10.0.80.3` respectively.
 
@@ -49,7 +49,7 @@ port no mac addr                is local?       ageing timer
   1     56:ea:d1:d7:a1:f4       yes                0.00
 ```
 
-A few [handy guides](https://techglimpse.com/convert-linux-bridge-hub-vm-interospection/) say to use `brctl setageing 0` in order to make the bridge act like a hub. But, I found it didn't work to remove the MAC addresses with `yes` under `is local?` so in my case was no good.
+A few [handy guides](https://techglimpse.com/convert-linux-bridge-hub-vm-interospection/) say to use `brctl setageing 0` in order to make the bridge act like a hub. But, I found it only worked to remove learned MAC addresses, not to remove the MAC addresses marked as `yes` under `is local?`. Still, it's an important first step although the modern solution is to append `ageing 0` to the `ip link` command when creating the bridge.
 
 After further research, but there's really not a lot of good resources on this, it's possible to use the `bridge fdb` command to manipulate the routing table at a lower level:
 
