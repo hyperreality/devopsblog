@@ -3,9 +3,10 @@ title:               DevOpsChops Diaries
 tagline:             'Notes from a developer of DevOps games'
 description:         'Notes from a developer of DevOps games'
 url:                 https://devopschops.com
-baseurl:             ''
+baseurl:             '/blog'
 paginate:            5
 permalink:           pretty
+
 
 # About/contact
 author:
