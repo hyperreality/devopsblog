@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Games for Learning Linux & the Command Line
+title: Games for Learning Linux and the Command Line
 ---
 
 This post is a survey of existing games people have made for learning Linux or just messing around on the command line.
