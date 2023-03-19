@@ -3,18 +3,18 @@ layout: post
 title: Games for Learning Linux and the Command Line
 ---
 
-This post is a survey of existing games people have made for learning Linux or just messing around on the command line.
+This post is a survey of existing games people have made for quickly picking up GNU/Linux-centric command line knowledge.
 
-The command line presents an interactive environment which can be adapted to games quite easily. A lot of old-school text adventure games like Zork and MUDs were based on the command line. This post focusses rather on games which teach you UNIX/Linux utilities in the process of play.
+The command line presents an interactive environment which can be adapted to games quite easily. A lot of old-school text adventure games like Zork and MUDs were based on the command line. This post focusses rather on games which teach you operating system skills in the process of playing.
 
 
-## The Command Line Murders (2013)
+## Command Line Murders (2013)
 
 [Link](https://github.com/veltman/clmystery)
 
 ![Command line murders](/public/commandlinemurders.png)
 
-There's been a murder, and you're a detective. The evidence is spread out among multiple text files. You have to write commands to narrow down the culprit. There's also a similar [murder mystery for SQL](https://mystery.knightlab.com/).
+There's been a murder, and you're a detective. The evidence is spread out among multiple text files. You have to write text wrangling and filtering commands to narrow down the culprit. There's also a similar [murder mystery for SQL](https://mystery.knightlab.com/).
 
 *Pros:* Great theme, fun premise. Succeeds in implementing learning by exploring. Hints and a cheatsheet are provided for less experienced players.
 
@@ -31,7 +31,7 @@ This is a series of mini command line tasks that you have to perform, e.g. `Prin
 
 *Pros:* Fast UI and it's addictive. Alternative solutions are offered which are interesting to read.
 
-*Cons:* Uses some kind of non-interactive shell with one-shot Docker images rather than providing a realistic environment. This also means that some correct solutions don't work! Most challenges are easy and it doesn't scale up to a substantial level of difficulty by the end. The tasks are fairly mundane.
+*Cons:* Uses some kind of non-interactive shell with one-shot Docker images rather than providing a realistic environment. This also means that some valid solutions don't work. Most challenges are easy and it doesn't scale up to a substantial level of difficulty by the end. The tasks are fairly mundane.
 
 
 ## Bashcrawl (2019)
@@ -44,7 +44,7 @@ This is a dungeon crawler game where each room is a directory, objects inside th
 
 *Pros:* The idea of mapping a filesystem to a game environment is a strong one. This feels more like an actual game than any of the others here, and simple commands are learned quickly by repetition.
 
-*Cons:* Some of the instructions, in trying overly to be noob-friendly ("drag and drop this folder into your terminal") manage to cause more confusion. Tracking game state is done manually perhaps to teach environment variables but this gets tedious. The game is only for beginners, if you know too much it's easy to break.
+*Cons:* Some of the instructions, in trying overly to be noob-friendly ("drag and drop this folder into your terminal") manage to cause more confusion. Tracking game state is done manually perhaps to teach environment variables but this gets tedious. The game is only for beginners; if you know too much it's easy to break.
 
 
 ## SadServers (2022)
@@ -55,7 +55,10 @@ This is a dungeon crawler game where each room is a directory, objects inside th
 
 Billed as "like LeetCode for Linux", this contains a number of individual timed troubleshooting challenges that are similar to hands-on SRE interviews.
 
-*Pros:* Realistic scenarios that make debugging actual accidents that could happen with servers fun. Not aimed at beginners, the challenges touch on advanced topics. Some challenges get you using tools that help understand Linux at a deeper level.
+*Pros:* Realistic scenarios that make debugging fun. Not aimed at beginners, the challenges touch on advanced topics. Challenges require you to use tools that help you understand Linux at a deeper level, which you rarely get outside of a real-life context.
 
 *Cons:* The UI isn't great and you have to wait a while for instances to launch, which spoils the immersion. Some of the challenges are obscure and don't clearly communicate a teachable idea.
+
+
+Overall, there's strong and weak points to each of these games. For complete beginners, Bashcrawl is a great way to start, and after some fluency on the command line has been reached, Command Challenge could be used to expand one's repertoire. After that, Command Line Murders could be considered a fun "final boss" to the Command Challenge. Finally, SadServers is less game-like but still exemplifies the more difficult end of the spectrum of acquiring Linux skills through play.
 
