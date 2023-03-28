@@ -4,6 +4,7 @@ _site
 .ruby-version
 .jekyll-cache
 .jekyll-metadata
+.bundle
 
 # Numerous always-ignore extensions
 *.diff

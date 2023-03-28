@@ -87,6 +87,10 @@ $ sudo brctl showmacs 8f4b9e2676
 port no mac addr                is local?       ageing timer
 ```
 
+It's also necessary to configure the `bridge-nf-call-iptables` kernel parameter. This disables packets from passing over the bridge from being processed by `iptables`. I don't understand why this needs to be done, since I removed all `iptables` rules and set all policies to `ACCEPT` and yet networking still didn't work until I set it:
+
+`sudo sysctl -w net.bridge.bridge-nf-call-iptables=0`
+
 And now, amazingly, the inter-microVM communication works! From inside the `10.0.80.2` VM:
 
 ```
