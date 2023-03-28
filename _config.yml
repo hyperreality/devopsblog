@@ -1,7 +1,7 @@
 # Setup
 title:               DevOpsChops Diaries
-tagline:             'Notes from a developer of DevOps games'
-description:         'Notes from a developer of DevOps games'
+tagline:             'Notes from a developer of a DevOps game'
+description:         'Notes from a developer of a DevOps game'
 url:                 https://devopschops.com
 baseurl:             ''
 paginate:            5
