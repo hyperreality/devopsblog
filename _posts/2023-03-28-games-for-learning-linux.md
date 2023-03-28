@@ -1,11 +1,9 @@
 ---
 layout: post
-title: Games for Learning Linux and the Command Line
+title: 5 Games for Learning Linux and the Command Line
 ---
 
-This post is a survey of existing games people have made for quickly picking up GNU/Linux-centric command line knowledge.
-
-The command line presents an interactive environment which can be adapted to games quite easily. A lot of old-school text adventure games like Zork and MUDs were based on the command line. This post focusses rather on games which teach you OS skills in the process of playing.
+The command line presents an interactive environment which can be adapted to games quite easily. A lot of old-school text adventure games like Zork and MUDs were based on the command line. This post focusses rather on games which teach you GNU/Linux-centric command line knowledge in the process of playing.
 
 
 ## OverTheWire Bandit (2012?)
@@ -71,6 +69,7 @@ Billed as "like LeetCode for Linux", this contains a number of individual timed 
 *Pros:* Realistic scenarios that make debugging fun. Not aimed at beginners, the challenges touch on advanced topics. Challenges require you to use tools that help you understand Linux at a deeper level, which you rarely get outside of a real-life context.
 
 *Cons:* The UI isn't great and you have to wait a while for instances to launch, which spoils the immersion. Some of the challenges are obscure and don't clearly communicate a teachable idea.
+
 
 ## Suggested order
 
